@@ -115,7 +115,7 @@ Popup.propTypes = {
   slotEnd: PropTypes.number,
   popperRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.Element }),
+    PropTypes.shape({ current: PropTypes.element }),
   ]),
 }
 

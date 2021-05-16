@@ -1,8 +1,7 @@
-import * as dates from '../utils/dates'
 import { DateLocalizer } from '../localizer'
 
 let dateRangeFormat = ({ start, end }, culture, local) =>
-  local.format(start, 'L', culture) + ' – ' + local.format(end, 'L', culture)
+  local.format(start, 'Do MMMM YYYY', culture) + ' – ' + local.format(end, 'Do MMMM YYYY', culture)
 
 let timeRangeFormat = ({ start, end }, culture, local) =>
   local.format(start, 'LT', culture) + ' – ' + local.format(end, 'LT', culture)
@@ -14,14 +13,15 @@ let timeRangeEndFormat = ({ end }, culture, local) =>
   ' – ' + local.format(end, 'LT', culture)
 
 let weekRangeFormat = ({ start, end }, culture, local) =>
-  local.format(start, 'MMMM DD', culture) +
+  local.format(start, 'Do MMMM', culture) +
   ' – ' +
-  local.format(end, dates.eq(start, end, 'month') ? 'DD' : 'MMMM DD', culture)
+  local.format(end, 'Do MMMM YYYY', culture)
 
 export let formats = {
   dateFormat: 'DD',
   dayFormat: 'DD ddd',
   weekdayFormat: 'ddd',
+  weekdayfullFormat: 'dddd',
 
   selectRangeFormat: timeRangeFormat,
   eventTimeRangeFormat: timeRangeFormat,
@@ -30,8 +30,8 @@ export let formats = {
 
   timeGutterFormat: 'LT',
 
-  monthHeaderFormat: 'MMMM YYYY',
-  dayHeaderFormat: 'dddd MMM DD',
+  monthHeaderFormat: 'DD MMMM YYYY',
+  dayHeaderFormat: 'DD MMMM YYYY',
   dayRangeHeaderFormat: weekRangeFormat,
   agendaHeaderFormat: dateRangeFormat,
 

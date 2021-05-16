@@ -116,6 +116,7 @@ class DayColumn extends React.Component {
       localizer,
       getters: { dayProp, ...getters },
       components: { eventContainerWrapper: EventContainer, ...components },
+      keyValue
     } = this.props
 
     let { slotMetrics } = this
@@ -134,7 +135,8 @@ class DayColumn extends React.Component {
           'rbc-time-column',
           isNow && 'rbc-now',
           isNow && 'rbc-today', // WHY
-          selecting && 'rbc-slot-selecting'
+          selecting && 'rbc-slot-selecting',
+          keyValue
         )}
       >
         {slotMetrics.groups.map((grp, idx) => (
@@ -171,9 +173,12 @@ class DayColumn extends React.Component {
         {isNow && this.intervalTriggered && (
           <div
             className="rbc-current-time-indicator"
-            style={{ top: `${this.state.timeIndicatorPosition}%` }}
-          />
+            style={{ top: `${this.state.timeIndicatorPosition}%`, marginLeft: "8px" }}
+          >
+            <div className="rbc-current-time-indicator circle-time-indicator" />
+          </div>
         )}
+        
       </div>
     )
   }

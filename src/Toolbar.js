@@ -2,6 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import clsx from 'clsx'
 import { navigate } from './utils/constants'
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import { Box, Typography } from '@material-ui/core';
 
 class Toolbar extends React.Component {
   render() {
@@ -13,29 +16,39 @@ class Toolbar extends React.Component {
     return (
       <div className="rbc-toolbar">
         <span className="rbc-btn-group">
-          <button
-            type="button"
-            onClick={this.navigate.bind(null, navigate.TODAY)}
-          >
-            {messages.today}
-          </button>
-          <button
-            type="button"
-            onClick={this.navigate.bind(null, navigate.PREVIOUS)}
-          >
-            {messages.previous}
-          </button>
-          <button
-            type="button"
-            onClick={this.navigate.bind(null, navigate.NEXT)}
-          >
-            {messages.next}
-          </button>
+          {this.viewNamesGroup(messages)}
         </span>
 
         <span className="rbc-toolbar-label">{label}</span>
 
-        <span className="rbc-btn-group">{this.viewNamesGroup(messages)}</span>
+        <span className="rbc-btn-group" >
+          <Box display="flex" flexDirection="row" alignItems="center" bgcolor="#EBF3F3">
+            <Box display="flex" width="32px" height="29px" justifyContent="center" alignItems="center" 
+              border=" 0.5px solid #C5C5C5" borderRadius="4px" bgcolor="#FFFFFF" 
+              onClick={this.navigate.bind(null, navigate.PREVIOUS)}
+              className="navigation"
+            >
+              <ChevronLeftRoundedIcon size="small" />
+            </Box>
+            <Box px={1}>
+              <Box display="flex" height="29px" justifyContent="center" alignItems="center" 
+                border=" 0.5px solid #C5C5C5" borderRadius="4px" bgcolor="#FFFFFF" px={2}
+                onClick={this.navigate.bind(null, navigate.TODAY)}
+                className="navigation"
+              >
+                <Typography className="noselect" >{messages.today}</Typography>
+              </Box>
+            </Box>
+            <Box
+              display="flex" width="32px" height="29px" justifyContent="center" alignItems="center" 
+              border=" 0.5px solid #C5C5C5" borderRadius="4px" bgcolor="#FFFFFF"
+              onClick={this.navigate.bind(null, navigate.NEXT)}
+              className="navigation"
+            >
+              <ChevronRightRoundedIcon />
+            </Box>
+          </Box>
+        </span>
       </div>
     )
   }

@@ -69,7 +69,7 @@ export default class TimeGrid extends Component {
       this.measureGutter()
     }
 
-    this.applyScroll()
+    //this.applyScroll()
     //this.checkOverflow()
   }
 
@@ -151,6 +151,7 @@ export default class TimeGrid extends Component {
             components={components}
             isNow={dates.eq(date, now, 'day')}
             key={i + '-' + jj}
+            keyValue={'row' + i + '-' + jj}
             date={date}
             events={daysEvents}
             backgroundEvents={daysBackgroundEvents}
@@ -180,6 +181,8 @@ export default class TimeGrid extends Component {
       showMultiDayTimes,
       longPressThreshold,
       resizable,
+      isDay,
+      isWeek
     } = this.props
 
     width = width || this.state.gutterWidth
@@ -222,7 +225,10 @@ export default class TimeGrid extends Component {
       <div
         className={clsx(
           'rbc-time-view',
-          resources && 'rbc-time-view-resources'
+          resources && 'rbc-time-view-resources',
+          isDay && 'rbc-time-view-day',
+          isWeek && 'rbc-time-view-week'
+          
         )}
       >
         <TimeGridHeader
@@ -248,6 +254,7 @@ export default class TimeGrid extends Component {
           onDrillDown={this.props.onDrillDown}
           getDrilldownView={this.props.getDrilldownView}
           resizable={resizable}
+          isWeek={isWeek}
         />
         <div
           ref={this.contentRef}
